@@ -30,12 +30,8 @@ class UI {
     this.createLoadManager();
     this.createOrbContainer();
     this.orbRadius = 0.15;
-
-    State.eventHandler.addEventListener(
-      "selectphoto",
-      this.selectPhoto.bind(this)
-    );
   }
+
   createLoadManager() {
     this.loadManager = new LoadingManager();
     this.loader = new TextureLoader(this.loadManager);
@@ -78,6 +74,7 @@ class UI {
   clearGrid() {
     this.grid.visible = false;
   }
+
   selectPhoto(data) {
     State.currentPhotoIndex = data.photoIndex;
     this.scene.background = this.photos[data.photoIndex];
@@ -95,12 +92,14 @@ class UI {
     let photoTexture = this.photos[State.currentPhotoIndex];
     this.scene.background = photoTexture;
   }
+
   createOrbContainer() {
     this.orbContainer = new Object3D();
     this.orbContainer.name = "OrbContainer";
     this.scene.add(this.orbContainer);
     this.setInitPosition();
   }
+
   setInitPosition() {
     if (State.initialPosition) {
       this.orbContainer.position.copy(State.initialPosition);
@@ -116,6 +115,7 @@ class UI {
       }
     }
   }
+
   createSelectionOrbs() {
     let photoTexture1 = this.photos[this.retrieveNextPhotoIndex(1)];
     let photoTexture2 = this.photos[this.retrieveNextPhotoIndex(-1)];
@@ -132,7 +132,6 @@ class UI {
     let sphere = new Mesh(geometry, orbMaterial1);
     sphere.position.setY(1.2);
     sphere.position.setZ(-1);
-    // sphere.scale.set(1, 1, -1);
     this.selectionOrb1 = sphere.clone();
     this.selectionOrb1.position.setX(-0.5);
     this.selectionOrb1.material.map = photoTexture1;

@@ -42,6 +42,7 @@ class Input {
       this.onSelectStart.bind(this)
     );
   }
+
   addRayCastVisualizer(controller) {
     const geometry = new BufferGeometry().setFromPoints([
       new Vector3(0, 0, 0),
@@ -56,6 +57,7 @@ class Input {
     line.ignoreRaycast = true;
     controller.add(line);
   }
+
   raycast(controller) {
     if (!this.orbContainer) return;
     if (!controller) {
@@ -72,15 +74,18 @@ class Input {
     );
     return this.getIntersections(intersects);
   }
+
   getIntersections(intersects) {
     if (!intersects.length) return;
     for (let i = 0; i < intersects.length; i++) {
       return intersects[0].object;
     }
   }
+
   onSelectStart(e) {
     this.onselect(this.getControllerFromInputSource(e));
   }
+
   onselect(controller) {
     if (
       controller._raycastAt == undefined ||
@@ -93,6 +98,7 @@ class Input {
       controller._raycastAt.inc
     );
   }
+
   getControllerFromInputSource(event) {
     const c = this._controllers.find(
       controller => controller.handedness === event.inputSource.handedness
@@ -104,4 +110,5 @@ class Input {
     else return c;
   }
 }
+
 export default Input;

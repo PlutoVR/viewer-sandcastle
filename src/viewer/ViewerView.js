@@ -34,15 +34,17 @@ class ViewerView extends Croquet.View {
     loadScene(this.scene);
 
     this.ui = new UI(this.scene);
-    const input = new Input(this.scene, this.ui);
+    this.input = new Input(this.scene, this.ui);
   }
+
   incrementPhotoIndex(increment) {
     this.currentPhotoIndex = this.ui.retrieveNextPhotoIndex(increment);
     const data = { photoIndex: this.currentPhotoIndex };
     this.publish("model", Q.INCREMENT_PHOTO_INDEX, data);
   }
+
   selectPhoto(data) {
-    State.eventHandler.dispatchEvent("selectphoto", data);
+    this.ui.selectPhoto(data);
   }
 
   setInitPosition(initPosition) {
